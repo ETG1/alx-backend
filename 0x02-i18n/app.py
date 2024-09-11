@@ -10,6 +10,7 @@ from pytz.exceptions import UnknownTimeZoneError
 from datetime import datetime
 import babel.dates
 
+
 class Config:
     """
     Config class for Flask application.
@@ -18,6 +19,7 @@ class Config:
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
+
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -31,6 +33,7 @@ users = {
     3: {"name": "Spock", "locale": "kg", "timezone": "Vulcan"},
     4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
 }
+
 
 @babel.localeselector
 def get_locale() -> str:
@@ -56,6 +59,7 @@ def get_locale() -> str:
 
     # 3. Check locale from request headers
     return request.accept_languages.best_match(app.config['LANGUAGES'])
+
 
 @babel.timezoneselector
 def get_timezone() -> str:
